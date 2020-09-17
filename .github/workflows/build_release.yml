@@ -9,14 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          token: ${{ secrets.CUSTOM_GITHUB_PAT }}
           submodules: true
-      - name: Build image
-        if: success()
-        run: |
-          docker build \
-              -f Dockerfile \
-              .
       - name: Build and push to Docker Hub
         uses: elgohr/Publish-Docker-Github-Action@master
         with:
