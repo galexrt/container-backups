@@ -6,13 +6,14 @@ A directory with its name represents the application / system to backup (`BACKUP
 
 Each directory can / must contain the following scripts:
 
-| Filename     | Optional? | Description                                                                                   |
-| ------------ | --------- | --------------------------------------------------------------------------------------------- |
-| `install.sh` | Optional  | Used to install any software, binaries, etc during the container image build.                 |
-| `backup.sh`  | Required  | Script which is run to backup an application / system.                                        |
-| `restore.sh` | Optional  | Used to restore a backup.                                                                     |
-| `pre.sh`     | Optional  | If exists, is run before `backup.sh` and `restore.sh`. E.g., to check for required variables. |
-| `post.sh`    | Optional  | If exists, is run after `backup.sh` and `restore.sh`.                                         |
+| Filename     | Optional? | Description                                                                                                                  |
+| ------------ | --------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `install.sh` | Optional  | Used to install any software, binaries, etc during the container image build.                                                |
+| `backup.sh`  | Required  | Script which is run to backup an application / system.                                                                       |
+| `restore.sh` | Optional  | Used to restore a backup.                                                                                                    |
+| `pre.sh`     | Optional  | If exists, is run before `backup.sh` and `restore.sh`. E.g., to check for required variables.                                |
+| `post.sh`    | Optional  | If exists, is run after `backup.sh` and `restore.sh`.                                                                        |
+| `test.sh`    | Optional  | Still to be decided, probably for application script tests using [bats (bats-core)](https://github.com/bats-core/bats-core). |
 
 ## Index
 

@@ -24,15 +24,15 @@ ACTION="${1:-help}"
 APPLICATION="${2:-}"
 
 case "${ACTION}" in
-help)
-    actionHelp "$0"
-;;
-backup|restore)
-    echo "Starting ${ACTION} script for ${APPLICATION} application / system"
-    executeApplicationScript "${APPLICATION}" "${ACTION}"
-    echo "Completed ${ACTION} script for ${APPLICATION} application / system"
-;;
-*)
-    "$0" help
-;;
+    help)
+        actionHelp "$0"
+    ;;
+    backup|restore)
+        echo "Starting ${ACTION} script for ${APPLICATION} application / system"
+        time executeApplicationScript "${APPLICATION}" "${ACTION}"
+        echo "Completed ${ACTION} script for ${APPLICATION} application / system"
+    ;;
+    *)
+        "$0" help
+    ;;
 esac

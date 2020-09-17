@@ -12,7 +12,7 @@ RUN chmod 755 /container-backups/*.sh \
     && . /container-backups/common.sh \
     && apt -q update -y \
     && apt upgrade -y \
-    && apt install -y wget pv tar bzip2 make \
+    && apt install -y wget pv tar bzip2 make jq \
     && wget https://dl.min.io/client/mc/release/${OS}-${ARCH}/mc -O /usr/local/bin \
     && chmod 755 /usr/local/bin/minio \
     && wget https://github.com/restic/restic/releases/download/v${RESTIC_VERSION}/restic_${RESTIC_VERSION}_${OS}_${ARCH}.bz2 -O /tmp/restic.bz2 \
