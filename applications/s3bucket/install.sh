@@ -1,3 +1,3 @@
 #!/bin/bash
 
-install_package s3fs
+apt-get install -y s3fs

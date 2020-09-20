@@ -1,11 +1,5 @@
 #!/bin/bash
 
-. ./restic.sh
-
-install_package() {
-    apt install -y "$@"
-}
-
 getVariable() {
     local var="${1}"
     # Check for MY_VAR_FILE variable
