@@ -1,0 +1,61 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  labels:
+    app.kubernetes.io/name: s3bucket-backup
+  name: s3bucket-backup
+spec:
+  schedule: "*/30 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: backup
+            image: galexrt/container-backups:latest
+            args:
+            - backup
+            - s3bucket
+            # Future versions will be able to use volume mounted Secrets and
+            # ConfigMaps for variables
+            env:
+              # See https://restic.readthedocs.io/en/stable/030_preparing_a_new_repo.html
+              - name: RESTIC_REPOSITORY
+                value: "s3:"
+              - name: RESTIC_PASSWORD
+                value: ""
+              - name: S3FS_AWS_ACCESS_KEY_ID
+                secretKeyRef:
+                  name: myobcbucket-bkt
+                  key: AWS_ACCESS_KEY_ID
+              - name: S3FS_AWS_SECRET_ACCESS_KEY
+                secretKeyRef:
+                  name: myobcbucket-bkt
+                  key: AWS_SECRET_ACCESS_KEY
+              - name: S3FS_BUCKET_URL
+                value: ""
+              - name: S3FS_BUCKET_PROTOCOL
+                value: "http"
+              - name: S3FS_BUCKET_URL_PATH
+                value: ""
+              - name: S3FS_BUCKET_HOST
+                valueFrom:
+                  configMapRef:
+                    name: myobcbucket-bkt
+                    key: BUCKET_HOST
+              - name: S3FS_BUCKET_PORT
+                valueFrom:
+                  configMapRef:
+                    name: myobcbucket-bkt
+                    key: BUCKET_PORT
+              - name: S3FS_BUCKET_NAME
+                valueFrom:
+                  configMapRef:
+                    name: myobcbucket-bkt
+                    key: BUCKET_NAME
+              - name: S3FS_BUCKET_REGION
+                valueFrom:
+                  configMapRef:
+                    name: myobcbucket-bkt
+                    key: BUCKET_REGION
+          restartPolicy: OnFailure

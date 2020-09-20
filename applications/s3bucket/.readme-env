@@ -1,0 +1,1 @@
+README_DESCRIPTION='Simple backup script for backing up a S3 bucket, by mounting it using `s3fs` and then backing it up.'

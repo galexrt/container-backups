@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# https://docs.min.io/docs/store-mongodb-backups-in-minio.html
+set -euo pipefail
 
-mongodump -h mongo-server1 -p 27017 -d blog-data --archive | \
-    mc pipe "minio1/mongobkp/backups/mongo-blog-data-$(date +%Y-%m-%d).archive"
+source ./variables.sh
+
+mongodump --host "${MONGODB_HOST}" --username "${MONGODB_USERNAME}" --password "${MONGODB_PASSWORD}" --archive | resticBackupFromStdin "mongodump-$(date +%s).sql"
