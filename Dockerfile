@@ -19,7 +19,7 @@ RUN chmod 755 /container-backups/*.sh \
     && bzip2 -d /tmp/restic.bz2 \
     && mv /tmp/restic /usr/local/bin/restic \
     && chmod 755 /usr/local/bin/restic \
-    && for script in /container-backups/applications/*/install.sh; do
+    && for script in /container-backups/applications/*/install.sh; do \
         echo "Running script ${script}"; \
         bash ${script} || { rt=${?}; echo "Script ${script} failed. Exit code ${rt}"; exit ${rt}; }; \
     done
